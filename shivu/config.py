@@ -2,18 +2,18 @@ class Config(object):
     LOGGER = True
 
     # Get this value from my.telegram.org/apps
-    OWNER_ID = "6765826972"
-    sudo_users = "6845325416", "6765826972"
-    GROUP_ID = -1002133191051
-    TOKEN = "6707490163:AAHZzqjm3rbEZsObRiNaT7DMtw_i5WPo_0o"
-    mongo_url = "mongodb+srv://HaremDBBot:ThisIsPasswordForHaremDB@haremdb.swzjngj.mongodb.net/?retryWrites=true&w=majority"
-    PHOTO_URL = ["https://telegra.ph/file/b925c3985f0f325e62e17.jpg", "https://telegra.ph/file/4211fb191383d895dab9d.jpg"]
-    SUPPORT_CHAT = "Collect_em_support"
-    UPDATE_CHAT = "Collect_em_support"
-    BOT_USERNAME = "Collect_Em_AllBot"
-    CHARA_CHANNEL_ID = "-1002133191051"
-    api_id = 26626068
-    api_hash = "bf423698bcbe33cfd58b11c78c42caa2"
+    OWNER_ID = "6954636450"
+    sudo_users = "6954636450","5629555417","7618952261","7224129219","7249975273","6347440084"
+    GROUP_ID = -1002265178229
+    TOKEN = "7841699829:AAEgFBEzVU-kDfL8R4qcULlAA5WdexU8XfQ"
+    mongo_url = "mongodb+srv://bak01072007:bak123456@waifu2.5ahbyyu.mongodb.net/"
+    PHOTO_URL = ["https://files.catbox.moe/umhazg.jpg", "https://files.catbox.moe/itvfzl.jpg"]
+    SUPPORT_CHAT = "-1002265178229"
+    UPDATE_CHAT = "-1002036001760"
+    BOT_USERNAME = "@Dynamic_Catcher_bot"
+    CHARA_CHANNEL_ID = "-1002472821477"
+    api_id = 25976808
+    api_hash = "30591a977139ed41fb5d736eaa090aa0"
 
     
 class Production(Config):
@@ -21,4 +21,5 @@ class Production(Config):
 
 
 class Development(Config):
+    LOGGER = True
     LOGGER = True

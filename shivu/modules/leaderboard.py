@@ -12,8 +12,10 @@ from shivu import (application, PHOTO_URL, OWNER_ID,
 from shivu import sudo_users as SUDO_USERS 
 
     
+
+
 async def global_leaderboard(update: Update, context: CallbackContext) -> None:
-    
+    # Fetch top 10 groups from the database
     cursor = top_global_groups_collection.aggregate([
         {"$project": {"group_name": 1, "count": 1}},
         {"$sort": {"count": -1}},
@@ -21,20 +23,30 @@ async def global_leaderboard(update: Update, context: CallbackContext) -> None:
     ])
     leaderboard_data = await cursor.to_list(length=10)
 
-    leaderboard_message = "<b>TOP 10 GROUPS WHO GUESSED MOST CHARACTERS</b>\n\n"
+    # Title with emoji
+    leaderboard_message = "🏆 <b>TOP 10 GROUPS WITH MOST CHARACTER GUESSES!</b> 🏆\n\n"
 
+    # Construct leaderboard rankings
+    medals = ["🥇", "🥈", "🥉"] + ["🎖️"] * 7  # Top 3 get medals, rest get ribbons
     for i, group in enumerate(leaderboard_data, start=1):
         group_name = html.escape(group.get('group_name', 'Unknown'))
 
-        if len(group_name) > 10:
+        # Truncate long names for better formatting
+        if len(group_name) > 15:
             group_name = group_name[:15] + '...'
+        
         count = group['count']
-        leaderboard_message += f'{i}. <b>{group_name}</b> ➾ <b>{count}</b>\n'
-    
-    
+        leaderboard_message += f"{medals[i-1]} <b>{group_name}</b> ➾ <b>{count}</b> 🔥\n"
+
+    # Pick a random celebratory image
     photo_url = random.choice(PHOTO_URL)
 
-    await update.message.reply_photo(photo=photo_url, caption=leaderboard_message, parse_mode='HTML')
+    # Send leaderboard with fancy styling
+    await update.message.reply_photo(
+        photo=photo_url,
+        caption=leaderboard_message,
+        parse_mode='HTML'
+    )
 
 async def ctop(update: Update, context: CallbackContext) -> None:
     chat_id = update.effective_chat.id
